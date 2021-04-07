@@ -101,7 +101,7 @@ public class Tree {
     public void AddL(String a, String b) throws IOException {
         if (a.isBlank() || b.isBlank())
         {
-            mySystem.bw.write("Input error.");
+            TernaryTree.bw.write("Input error.");
 
             return;
         }
@@ -125,7 +125,7 @@ public class Tree {
                 if (b.startsWith("$"))
                     temp.left.data = b.substring(1);
                 else
-                    mySystem.bw.write("Add operation not possible.\n");
+                    TernaryTree.bw.write("Add operation not possible.\n");
             }
         }
     }
@@ -133,7 +133,7 @@ public class Tree {
     public void AddM(String a, String b) throws IOException {
         if (a.isBlank() || b.isBlank())
         {
-            mySystem.bw.write("Input error.\n");
+            TernaryTree.bw.write("Input error.\n");
 
             return;
         }
@@ -153,7 +153,7 @@ public class Tree {
                 if (b.startsWith("$"))
                     temp.middle.data = b.substring(1);
                 else
-                    mySystem.bw.write("Add operation not possible.\n");
+                    TernaryTree.bw.write("Add operation not possible.\n");
             }
         }
     }
@@ -162,7 +162,7 @@ public class Tree {
     public void AddR(String a, String b) throws IOException {
         if (a.isBlank() || b.isBlank())
         {
-            mySystem.bw.write("Input error.");
+            TernaryTree.bw.write("Input error.");
 
             return;
         }
@@ -185,7 +185,7 @@ public class Tree {
                     temp.right.data = b.substring(1);
                 }
                 else
-                    mySystem.bw.write("Add operation not possible.\n");
+                    TernaryTree.bw.write("Add operation not possible.\n");
             }
         }
 
@@ -197,7 +197,7 @@ public class Tree {
     public void DelL(String a) throws IOException {
         if(a.isBlank())
         {
-            mySystem.bw.write("Input error.");
+            TernaryTree.bw.write("Input error.");
             return;
         }
         Element temp = findInQueue( a, false);
@@ -212,7 +212,7 @@ public class Tree {
     public void DelM(String a) throws IOException {
         if(a.isBlank())
         {
-            mySystem.bw.write("Input error.");
+            TernaryTree.bw.write("Input error.");
             return;
         }
         Element temp = findInQueue( a, false);
@@ -226,7 +226,7 @@ public class Tree {
     public void DelR(String a) throws IOException {
         if(a.isBlank())
         {
-            mySystem.bw.write("Input error.");
+            TernaryTree.bw.write("Input error.");
             return;
         }
         Element temp = findInQueue( a, false);
@@ -244,7 +244,7 @@ public class Tree {
 
         if (a.isBlank() || b.isBlank())
         {
-            mySystem.bw.write("Input error.");
+            TernaryTree.bw.write("Input error.");
             return;
         }
         Element temp = null;
@@ -279,17 +279,17 @@ public class Tree {
             for (int nodeCount = queue.size(); nodeCount > 0; nodeCount--){
                 Element front = queue.getFront();
                 if(i <= height & nodeCount -1 != 0) {
-                    mySystem.bw.write(front.data + " ; ");
+                    TernaryTree.bw.write(front.data + " ; ");
                 }
 
                 else {
-                    mySystem.bw.write(front.data);
+                    TernaryTree.bw.write(front.data);
                 }
                 queue.dequeue();
                 // load the children to the queue
                 queue = enqueueNextLevel(queue, front);
             }
-            mySystem.bw.write("\n");
+            TernaryTree.bw.write("\n");
 
         }
     }

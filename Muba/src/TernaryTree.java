@@ -4,7 +4,7 @@
 
 import java.io.*;
 
-public class mySystem {
+public class TernaryTree {
 
     public static BufferedWriter bw;
     static FileWriter fw;
