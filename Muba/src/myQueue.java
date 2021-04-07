@@ -1,8 +1,12 @@
-public class CustomQueue {
-    QueueNode front, last;
+
+//import TreeNode;
+
+// CUSTOM QUEUE IS IMPLEMENTED
+public class myQueue {
+    Node front, last;
 
     // CONSTRUCTOR
-    public CustomQueue(){
+    public myQueue(){
         front = null;
         last = null;
     }
@@ -13,7 +17,7 @@ public class CustomQueue {
     }
 
     // GETS FIRST ELEMENT OF QUEUE
-    public TreeNode getFront(){
+    public Element getFront(){
         return front.data;
     }
 
@@ -21,7 +25,7 @@ public class CustomQueue {
     public int size(){
         int count = 0;
         if (!isEmpty()){
-            QueueNode temp = front;
+            Node temp = front;
 
             // ITERATES TILL END
             while(temp != null){
@@ -33,8 +37,8 @@ public class CustomQueue {
     }
 
     // ADDS NODE TO THE QUEUE
-    public void enqueue(TreeNode node){
-        QueueNode newNode = new QueueNode();
+    public void enqueue(Element node){
+        Node newNode = new Node();
         newNode.data = node;
 
         // CHECKS IF QUEUE IS EMPTY

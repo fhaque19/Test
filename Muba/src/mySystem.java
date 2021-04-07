@@ -1,138 +1,146 @@
+
+
+//import Tree.*;
+
 import java.io.*;
 
 public class mySystem {
 
-    public static BufferedWriter bWriter;
-    static FileWriter fWriter;
+    public static BufferedWriter bw;
+    static FileWriter fw;
 
-    // This method searches the string for any white spaces
-    public static boolean hasWhiteSpace(String line) {
-        for (char character : line.toCharArray()) {
-            if (character == ' ')
-                return true;
-        }
-        return false;
-    }
+
     // This is the main method
     public static void main(String[] args) throws IOException {
-        // This will be the input file's name.
-        String in = args[0];
-        // This will be the output file's name
-        String file = args[1];
+
+        // These will be the input and output file's names.
+        String inputfile = args[0];
+        String outputfile = args[1];
         // These are the write instances, used to write into the output file
-        fWriter = new FileWriter(file);
-        bWriter = new BufferedWriter(fWriter);
+        fw = new FileWriter(outputfile);
+        bw = new BufferedWriter(fw);
 
         // This will open the input file to read line by line
         // any error will be caught using try catch
-        try(BufferedReader bReader = new BufferedReader(new FileReader(new File(in)))){
+        try(BufferedReader readFromFile = new BufferedReader(new FileReader(new File(inputfile)))){
 
-        // Initiated a tree to store the data
-            Tree ternaryTree = new Tree();
+            // Initiated a tree to store the data
+            Tree myTree = new Tree();
             String line;
-            String[] arrOfStr;
+            String[] strArray;
 
-        // This loop reads the lines of the input file till the end of the file
-            while ((line = bReader.readLine()) != null){
+            // This loop reads the lines of the input file till the end of the file
+            while ((line = readFromFile.readLine()) != null){
 
                 // Checking for white space
-                if (!hasWhiteSpace(line)){
+                if (!checkSpace(line)){
 
 
                     // Spliting the line into two parts using ( to extract operation and operators
-                    arrOfStr = line.split("\\(");
+                    strArray = line.split("\\(");
                     // for function
                     // first part will be operator
-                    char[] arr;
-                    String operation = arrOfStr[0];
+                    char[] operands;
+                    String operation = strArray[0];
 
                     try{
-                        arr = arrOfStr[1].toCharArray();
+                        operands = strArray[1].toCharArray();
                     }
                     catch (ArrayIndexOutOfBoundsException e){
                         continue;
                     }
                     String a = "";
                     String b = "";
+
                     // for a
-                    for (int j = 0;  j < arr.length - 1 ; j++)
+                    if (operation.startsWith("Del"))
+                        if (operands.length == 2)
+                            continue;
+                    for (int j = 0;  j < operands.length - 1 ; j++)
                     {
                         // To not add the last part of the string i.e., )
-                        if (j != arr.length) {
+                        if (j != operands.length) {
 
                             // to add the , to the first part until the last comma is faced
-                            if (arr[j] == ',' && !(arr[j + 1] == ',')) {
+                            if (operands[j] == ',' && !(operands[j + 1] == ',')) {
                                 break;
                             }
                             // Concatenating the first part of operands
-                            a += arr[j];
+                            a += operands[j];
                         }
                     }
-
                     // Every character after the first operand will be considered second operand
                     // for b
-                    for(int j = a.length() + 1; j < arr.length - 1; j++)
-                        b += arr[j];
-
+                    for(int j = a.length() + 1; j < operands.length - 1; j++)
+                        b += operands[j];
                     // If operation is Add left
                     if (operation.matches("AddL"))
                     {
-                        ternaryTree.AddL(a,b);
+                        myTree.AddL(a,b);
                     }
                     // If operation is Add Middle
                     else if (operation.matches("AddM"))
                     {
-                        ternaryTree.AddM(a,b);
+                        myTree.AddM(a,b);
                     }
                     // If operation is Add Right
                     else if (operation.matches("AddR"))
                     {
-                        ternaryTree.AddR(a,b);
+                        myTree.AddR(a,b);
                     }
                     // If operation is Delete left
                     else if (operation.matches("DelL"))
                     {
-                        ternaryTree.DelL(a);
+                        myTree.DelL(a);
                     }
                     // If operation is Delete Middle
                     else if (operation.matches("DelM"))
                     {
-                        ternaryTree.DelM(a);
+                        myTree.DelM(a);
                     }
                     // If operation is Delete Right
                     else if (operation.matches("DelR"))
                     {
-                        ternaryTree.DelR(a);
+                        myTree.DelR(a);
                     }
                     // If operation is Print
                     else if (operation.matches("Print"))
                     {
-                        ternaryTree.print();
+                        myTree.print();
                     }
                     // If operation is Exchange
                     else if (operation.matches("Exchange"))
                     {
-                        ternaryTree.exchange(a,b);
+                        myTree.exchange(a,b);
                     }
                     // If the operation is not a known operation
                     else
                     {
-                        bWriter.write("Input error.");
+                        bw.write("Input error.");
                     }
                 }
                 // IF THE INPUT FILE CANNOT BE ACCESSED
                 else{
-                    bWriter.write("Input error.");
+                    bw.write("Input error.");
                 }
             }
         }
         // ERROR WILL BE WRITTEN TO THE FILE
         catch (IOException e){
-            bWriter.write("File "+ in + " does not exist");
+            bw.write("File "+ inputfile + " not found");
 
         }
-        // FLUSHING THE CONTENT OF THE BUFFER WRITER ON TO THE FILE
-        bWriter.flush();
-        bWriter.close();
+
+        // CLOSING THE WRITER
+        bw.flush();
+        bw.close();
+    } // This method searches the string for any white spaces
+
+    public static boolean checkSpace(String line) {
+        for (char character : line.toCharArray()) {
+            if (character == ' ')
+                return true;
+        }
+        return false;
     }
 }

@@ -1,11 +1,11 @@
-public class TreeNode {
+public class Element {
 
     // DATA IS STORED IN THE FIELD
     String data;
-    TreeNode left, middle, right;
+    Element left, middle, right;
 
     // CONSTRUCTOR
-    public TreeNode(String data){
+    public Element(String data) {
         this.data = data;
     }
 }
